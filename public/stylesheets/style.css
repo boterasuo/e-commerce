@@ -1,0 +1,8 @@
+.d-flex > div {
+    margin: 1rem;
+    width: 100px;
+    height: 100px;
+    background: pink;
+    text-align: center;
+    line-height: 100px;
+}
