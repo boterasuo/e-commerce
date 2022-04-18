@@ -1,18 +1,28 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
-var hbs = require('hbs');
+const connection = require('./utils/db');
+const sassMiddleware = require('node-sass-middleware');
 
-var app = express();
+const hbs = require('hbs');
+
+const app = express();
 
 // view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
+// section helper for jQuery
+hbs.registerHelper('section', function(name, options) {
+  if(!this._sections) this._sections = {};
+  console.log('this', this);
+  this._sections[name] = options.fn(this);
+  return null;
+});
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -20,8 +30,29 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// sass middleware
+app.use(sassMiddleware({
+  src: path.join(__dirname, 'public'),
+  dest: path.join(__dirname, 'public'),
+  indentedSyntax: false, // false for scss
+  debug: true,
+  outputStyle: 'compressed',
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/api/products', async (req, res, next) => {
+  let [products] = await connection.execute("SELECT * FROM products");
+  console.log('products', products);
+  products = products[0];
+  let returnProducts = {
+    id: products.id,
+    name: products.name,
+    price: products.price,
+    stock: products.stock,
+  };
+  res.json({data: returnProducts});
+})
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
