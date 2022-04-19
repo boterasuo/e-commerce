@@ -4,15 +4,43 @@
         <div class="d-flex flex-column">
             <div class="input-block">
                 <label for="email">帳號</label>
-                <input type="email" id="email" placeholder="請輸入常用信箱">
+                <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="請輸入常用信箱" 
+                    name="email" 
+                    value="{{email}}"
+                >
+                <div class="error-msg" id="email-error">{{{errorDIV.email}}}</div>
+                <button type="button" 
+                        class="btn btn-secondary btn-sm"
+                        id="check-email"
+                >
+                    check email
+                </button>
+                <span id="check-result"></span>
             </div>
             <div class="input-block">
                 <label for="password">密碼</label>
-                <input type="password" id="password" placeholder="請輸入至少 8 碼">
+                <input 
+                    type="password" 
+                    id="password" 
+                    placeholder="請輸入至少 8 碼"
+                    name="password"
+                    value="{{password}}"
+                >
+                <div class="error-msg" id="password-error">{{{errorDIV.password}}}</div>
             </div>
             <div class="input-block">
                 <label for="confirmPw">確認密碼</label>
-                <input type="password" id="confirmPw">
+                <input 
+                    type="password" 
+                    id="confirmPw"
+                    placeholder="請再輸入一次密碼"
+                    name="confirmPw"
+                    value="{{confirmPw}}"
+                >
+                <div class="error-msg" id="confirmPw-error">{{{errorDIV.confirmPw}}}</div>
             </div>
         </div>
         <div class="py-3 text-center">
@@ -21,7 +49,7 @@
         </div>
     </form>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+{{!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
 {{#section 'script'}}
 <script src="/javascripts/register.js"></script>
 {{/section}}

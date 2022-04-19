@@ -13,23 +13,22 @@ const sassMiddleware = require('node-sass-middleware');
 const hbs = require('hbs');
 
 const app = express();
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
 // section helper for jQuery
 hbs.registerHelper('section', function(name, options) {
   if(!this._sections) this._sections = {};
-  console.log('this', this);
+  // console.log('this', this);
   this._sections[name] = options.fn(this);
   return null;
 });
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 // sass middleware
 app.use(sassMiddleware({

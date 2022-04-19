@@ -1,22 +1,20 @@
 // var fs = require('fs');
 // let svgShrimp = fs.readFileSync('./public/images/shrimp.svg', 'utf8');
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/userController');
 
-/* GET home page. */
-router.get('/signUp', (req, res, next) => {
-  res.render('register', { title: 'sign up' })
-});
-router.post('signUp', (req, res, next) => {
-  let signUp = req.body;
-  console.log(signUp);
-})
+// signUp & signIn
+router.post('/checkEmail', userController.emailCheck);
+router.get('/signUp', userController.registerPage);
+router.post('/signUp', userController.registerRules, userController.register);
 
 router.get('/box', (req, res, next) => {
   let active = {shop: true};
   res.render('box', { title: 'box page', active});
 });
 
+/* GET home page. */
 router.get('/', function(req, res, next) {
   let active = {home: true};
   res.render('index', { title: 'Seafood', active});
