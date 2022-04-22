@@ -5,9 +5,12 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 // signUp & signIn
-router.post('/checkEmail', userController.emailCheck);
+router.post('/signUp/checkEmail', userController.emailCheck);
 router.get('/signUp', userController.registerPage);
 router.post('/signUp', userController.registerRules, userController.register);
+router.get('/signIn', userController.loginPage);
+router.post('/signIn', userController.login);
+router.get('/logout', userController.logout);
 
 router.get('/box', (req, res, next) => {
   let active = {shop: true};
@@ -17,7 +20,8 @@ router.get('/box', (req, res, next) => {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let active = {home: true};
-  res.render('index', { title: 'Seafood', active});
+  let auth = req.session.member;
+  res.render('index', { title: 'Seafood', active, auth});
 });
 
 

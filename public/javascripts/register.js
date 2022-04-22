@@ -1,20 +1,40 @@
+// email 格式
+let regEmail=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
 // check-email input
-$('#check-email').click(() => {
+$('#check-email').click(function () {
+    $(this).text('Loading...');
+    let spinner = `<div class="spinner-border ms-1" role="status" id="check-spinner">
+    <span class="visually-hidden">Loading...</span></div>`
+
+    $(this).append(spinner);
     let email = $('#email').val();
-    $.ajax({
-        method: 'POST',
-        url: '/checkEmail',
-        data: { email: email },
-        // dataType: 'json'
-    })
-    .done((response) => {
-        console.log('response', response);
-        let result = response.result;
-        $('#check-result').text(result);
-    })
-    .fail((error) => {
-        console.log(error);
-    })
+    if (email === '') {
+        $('#email-error').text('email 不可為空');
+    } else if (!regEmail.test(email)) {
+        $('#email-error').text('email 格式錯誤');
+    } else {
+        // function checkEmailAjax() {
+            $.ajax({
+                method: 'POST',
+                url: '/signUp/checkEmail',
+                data: { email: email },
+                // dataType: 'json' //server 回傳的資料格式 (header: content-type)
+            })
+            .done((response) => {
+                console.log('response', response);
+                let result = response.result;
+                $('#check-result').text(result);
+            })
+            .fail((error) => {
+                console.log(error);
+            })
+        // }
+        // (setTimeout(() => {
+        //     checkEmailAjax()
+        // }, 1000))();
+    }
+    $(this).text('check email').children('div').remove();
 });
 
 // 前端 input 驗證
@@ -22,9 +42,6 @@ $('#submit-btn').click(function() {
     let email = $('#email').val(),
         password = $('#password').val(),
         confirmPw = $('#confirmPw').val();
-    
-    // email 格式
-    let regEmail=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 
     if (email === '') {
         $('#email-error').text('email 不可為空');
@@ -53,6 +70,7 @@ $('#submit-btn').click(function() {
 // input 欄位變更時清空錯誤提醒
 $('#email').on('change keyup', function(){
     $('#email-error').text('');
+    $('#check-result').text('');
 });
 $('#password').on('change keyup', function(){
     $('#password-error').text('');
@@ -61,7 +79,3 @@ $('#confirmPw').on('change keyup', function(){
     $('#confirmPw-error').text('');
 });
 
-// 關閉訊息提醒視窗
-$('#close-msgBOX').click(() => {
-    $('.message-box').removeClass('show');
-})

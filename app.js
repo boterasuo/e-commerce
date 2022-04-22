@@ -1,11 +1,9 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
 const connection = require('./utils/db');
 const sassMiddleware = require('node-sass-middleware');
@@ -16,7 +14,19 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
+const expressSession = require('express-session');
+let fileStore = require('session-file-store')(expressSession);
+app.use(
+  expressSession({
+    store: new fileStore({
+      path: path.join(__dirname, 'sessions'),
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // view engine setup
 hbs.registerPartials(__dirname + '/views/partials');
@@ -53,8 +63,16 @@ app.get('/api/products', async (req, res, next) => {
   res.json({data: returnProducts});
 })
 
+app.use((req, res, next) => {
+  // console.log('req.session', req.session.member);
+  if (req.session.member) {
+    req.user = req.session.member;
+  } else {
+    req.user = null;
+  }
+  next();
+})
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

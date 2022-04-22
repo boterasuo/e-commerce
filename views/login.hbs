@@ -1,0 +1,36 @@
+<div class="w-25 m-auto py-4">
+    <h2 class="text-center">登入</h2>
+    <form action="/signIn" method="POST" id="loginForm">
+        <div class="d-flex flex-column">
+            <div class="input-block">
+                <label for="email">帳號</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="請輸入註冊信箱" 
+                    name="email" 
+                    value="{{email}}"
+                >
+                <div class="error-msg" id="email-error"></div>
+            </div>
+            <div class="input-block">
+                <label for="password">密碼</label>
+                <input 
+                    type="password" 
+                    id="password"
+                    placeholder="請輸入您的密碼" 
+                    name="password"
+                    value="{{password}}"
+                >
+                <div class="error-msg" id="password-error"></div>
+            </div>
+        </div>
+        <div class="py-3 text-center">
+            <button class="btn btn-dark" type="button" id="login-btn">登入</button>
+        </div>
+    </form>
+</div>
+{{!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
+{{#section 'script'}}
+<script src="/javascripts/login.js"></script>
+{{/section}}

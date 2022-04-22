@@ -14,8 +14,18 @@
         </li>
         <div class="ms-auto d-flex">
           <li class="nav-item">
-            <a class="nav-link" href="/signUp">註冊</a>
+            <a class="nav-link {{#if active.signUp}}active{{/if}}" href="/signUp">註冊</a>
           </li>
+          {{#unless auth}}
+          <li class="nav-item">
+            <a class="nav-link" href="/signIn">登入</a>
+          </li>
+          {{/unless}}
+          {{#if auth}}
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">登出</a>
+          </li>
+          {{/if}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#member" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               會員
