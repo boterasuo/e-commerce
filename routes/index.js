@@ -12,7 +12,7 @@ router.get('/signIn', userController.loginPage);
 router.post('/signIn', userController.login);
 router.get('/logout', userController.logout);
 
-router.get('/box', (req, res, next) => {
+router.get('/product', (req, res, next) => {
   let active = {shop: true};
   res.render('box', { title: 'box page', active});
 });
@@ -20,8 +20,7 @@ router.get('/box', (req, res, next) => {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let active = {home: true};
-  let auth = req.session.member;
-  res.render('index', { title: 'Seafood', active, auth});
+  res.render('index', { title: 'Seafood', active});
 });
 
 

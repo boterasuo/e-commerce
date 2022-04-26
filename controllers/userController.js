@@ -7,7 +7,6 @@ const userController = {
     // 註冊頁 get
     registerPage: (req, res) => {
         let auth = req.user;
-        // console.log('auth status', auth);
         if (auth) {
             return res.redirect('/');
         } 
@@ -107,7 +106,7 @@ const userController = {
         let [member] = await connection.execute(
             'SELECT * FROM users WHERE email=?', [email]
         );
-        console.log('member', member);
+        // console.log('member', member);
         if (member.length === 0) {
             console.log("no member data!");
             let messageBOX = {loginMsg: '此帳號尚未註冊'} 
@@ -138,13 +137,11 @@ const userController = {
         }
         // 登入成功寫 session
         req.session.member = returnMember;
-        let active = {home: true};
-        let auth = true; 
-        return res.render('index', {
-            title: 'Seafood',
-            active,
-            auth
-        });
+        req.session.save(function(err) {
+            if (!err) {
+                res.redirect('/');
+            }
+        })
     },
     // 登出
     logout: (req, res) => {

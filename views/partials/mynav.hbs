@@ -10,13 +10,13 @@
           <a class="nav-link {{#if active.home}}active{{/if}}" aria-current="page" href="/" >首頁</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{#if active.shop}}active{{/if}}" href="/box">購物</a>
+          <a class="nav-link {{#if active.shop}}active{{/if}}" href="/product">購物</a>
         </li>
         <div class="ms-auto d-flex">
+          {{#unless auth}}
           <li class="nav-item">
             <a class="nav-link {{#if active.signUp}}active{{/if}}" href="/signUp">註冊</a>
           </li>
-          {{#unless auth}}
           <li class="nav-item">
             <a class="nav-link" href="/signIn">登入</a>
           </li>
@@ -25,16 +25,16 @@
           <li class="nav-item">
             <a class="nav-link" href="/logout">登出</a>
           </li>
-          {{/if}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#member" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               會員
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" href="/member">會員資料</a></li>
-              <li><a class="dropdown-item" href="/member/order">訂單</a></li>
+              <li><a class="dropdown-item" href="/member/order">訂單查詢</a></li>
             </ul>
           </li>
+          {{/if}}
         </div>
       </ul>
     </div>

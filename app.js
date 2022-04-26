@@ -11,6 +11,9 @@ const sassMiddleware = require('node-sass-middleware');
 const hbs = require('hbs');
 
 const app = express();
+
+// require('./redis/productCache');
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -64,14 +67,20 @@ app.get('/api/products', async (req, res, next) => {
 })
 
 app.use((req, res, next) => {
-  // console.log('req.session', req.session.member);
   if (req.session.member) {
-    req.user = req.session.member;
+    res.locals.auth = req.session.member;
   } else {
-    req.user = null;
+    res.locals.auth = false;
   }
+  req.user = req.session.member;
+
+  // if (req.session.member) {
+  //   req.user = req.session.member;
+  // } else {
+  //   req.user = null;
+  // }
   next();
-})
+});
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
