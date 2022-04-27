@@ -21,6 +21,8 @@ router.get('/test',
 productController.testCach,
   productController.test
 );
+router.get('/product', productController.product);
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

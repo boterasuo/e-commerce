@@ -45,10 +45,10 @@ app.set('view engine', 'hbs');
 // sass middleware
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
   indentedSyntax: false, // false for scss while true for sass
   debug: true,
   outputStyle: 'compressed',
+  maxAge: 0
 }));
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: 3600000
@@ -56,6 +56,9 @@ app.use(express.static(path.join(__dirname, 'public'), {
 
 app.use((req, res, next) => {
   res.locals.auth = req.session.member;
+  let timestamp = Date.now();
+  console.log('timestamp', timestamp);
+  res.locals.timestamp = timestamp;
   next();
 });
 app.use('/', indexRouter);

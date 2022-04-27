@@ -27,7 +27,7 @@ const productController = {
         };
         res.render('products', returnData);
     },
-    // 產品 cache
+    // 產品列表 cache
     productsCache: async (req, res, next) => {
         console.log('check if cached')
         let data = await client.get('products');
@@ -43,7 +43,12 @@ const productController = {
             console.log('cache not yet exist');
             next();
         }
-
+    },
+    product: async (req, res, next) => {
+        let returnData = {
+            title: 'product'
+        }
+        res.render('product', returnData);
     },
     // Redis test
     test: async (req, res) => {
