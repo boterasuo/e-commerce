@@ -13,7 +13,14 @@ router.get('/signIn', userController.loginPage);
 router.post('/signIn', userController.login);
 router.get('/logout', userController.logout);
 
-router.get('/products', productController.products);
+// products
+router.get('/products', 
+  productController.productsCache,
+  productController.products);
+router.get('/test', 
+productController.testCach,
+  productController.test
+);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

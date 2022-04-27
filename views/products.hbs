@@ -1,17 +1,14 @@
 <div class="d-flex flex-wrap">
     {{#each info}}
-    <div class="product-card">
+    <a class="product-card" href="#">
         <figure class="ratio ratio-4x3">
             <img class="cover-fit" src="/images/{{this.image}}" alt="{{this.name}}">
+            <div class="hover-cover">查看商品詳情</div>
         </figure>
         <div class="product-info">
             <h4>{{this.name}}</h4>
             <h4>NT$ {{this.price}}</h4>
         </div>
-        <div class="product-info">
-            <p class="m-0">庫存： {{this.stock}} </p>
-            <button type="button" class="btn btn-dark btn-sm">加入購物車</button>
-        </div>
-    </div>
+    </a>
     {{/each}}
 </div>

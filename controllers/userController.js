@@ -6,7 +6,7 @@ const { body, validationResult } = require('express-validator');
 const userController = {   
     // 註冊頁 get
     registerPage: (req, res) => {
-        let auth = req.user;
+        let auth = req.session.member;
         if (auth) {
             return res.redirect('/');
         } 
@@ -94,7 +94,7 @@ const userController = {
     },
     // 登入頁面
     loginPage: (req, res) => {
-        let auth = req.user;
+        let auth = req.session.member;
         if (auth) {
             return res.redirect('/');
         }
@@ -139,6 +139,7 @@ const userController = {
         req.session.member = returnMember;
         req.session.save(function(err) {
             if (!err) {
+                res.locals.auth = req.session.member;
                 res.redirect('/');
             }
         })

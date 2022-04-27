@@ -1,3 +1,10 @@
+a {
+    text-decoration: none;
+    color: #000;
+    &:hover {
+        color: #000;
+    }
+}
 .container {
     margin-bottom: 60px;
 }
@@ -74,10 +81,29 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
     overflow: hidden;
+    transition: .4s;
+    position: relative;
+    cursor: pointer;
     .product-info {
         margin: 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    .hover-cover {
+        position: absolute;
+        top: 0;
+        background: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        line-height: 225px;
+        color: white;
+        transition: .4s;
+        opacity: 0;
+    }
+    &:hover {
+        transform: scale(1.1);
+        .hover-cover {
+            opacity: 1;
+        }
     }
 }

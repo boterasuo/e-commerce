@@ -12,7 +12,6 @@ const hbs = require('hbs');
 
 const app = express();
 
-// require('./redis/productCache');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -47,32 +46,16 @@ app.set('view engine', 'hbs');
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
-  indentedSyntax: false, // false for scss
+  indentedSyntax: false, // false for scss while true for sass
   debug: true,
   outputStyle: 'compressed',
 }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/api/products', async (req, res, next) => {
-  let [products] = await connection.execute("SELECT * FROM products");
-  console.log('products', products);
-  products = products[0];
-  let returnProducts = {
-    id: products.id,
-    name: products.name,
-    price: products.price,
-    stock: products.stock,
-  };
-  res.json({data: returnProducts});
-})
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: 3600000
+}));
 
 app.use((req, res, next) => {
-  if (req.session.member) {
-    res.locals.auth = req.session.member;
-  } else {
-    res.locals.auth = false;
-  }
-  req.user = req.session.member;
+  res.locals.auth = req.session.member;
   next();
 });
 app.use('/', indexRouter);
