@@ -57,7 +57,6 @@ app.use(express.static(path.join(__dirname, 'public'), {
 app.use((req, res, next) => {
   res.locals.auth = req.session.member;
   let timestamp = Date.now();
-  console.log('timestamp', timestamp);
   res.locals.timestamp = timestamp;
   next();
 });
