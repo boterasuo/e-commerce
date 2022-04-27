@@ -1,3 +1,6 @@
+.container {
+    margin-bottom: 60px;
+}
 .show {
     display: block;
 }
@@ -19,6 +22,11 @@
         outline: none;
         border: 1px solid #000;
     }
+}
+.cover-fit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .spinner-border {
     width: 1rem;
@@ -44,7 +52,7 @@
         display: block;
     }
 }
-
+// 首頁
 @keyframes shake {
     25% {
         transform: rotate(15deg);
@@ -58,4 +66,18 @@
 }
 .svgShrimp:hover {
     animation: shake 0.3s 1 linear normal both;
+}
+// 商品頁
+.product-card {
+    margin: 1rem 2rem;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    overflow: hidden;
+    .product-info {
+        margin: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

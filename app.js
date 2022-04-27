@@ -73,12 +73,6 @@ app.use((req, res, next) => {
     res.locals.auth = false;
   }
   req.user = req.session.member;
-
-  // if (req.session.member) {
-  //   req.user = req.session.member;
-  // } else {
-  //   req.user = null;
-  // }
   next();
 });
 app.use('/', indexRouter);

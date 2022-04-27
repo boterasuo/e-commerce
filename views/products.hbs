@@ -1,0 +1,17 @@
+<div class="d-flex flex-wrap">
+    {{#each info}}
+    <div class="product-card">
+        <figure class="ratio ratio-4x3">
+            <img class="cover-fit" src="/images/{{this.image}}" alt="{{this.name}}">
+        </figure>
+        <div class="product-info">
+            <h4>{{this.name}}</h4>
+            <h4>NT$ {{this.price}}</h4>
+        </div>
+        <div class="product-info">
+            <p class="m-0">庫存： {{this.stock}} </p>
+            <button type="button" class="btn btn-dark btn-sm">加入購物車</button>
+        </div>
+    </div>
+    {{/each}}
+</div>
