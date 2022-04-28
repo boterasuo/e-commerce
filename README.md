@@ -13,7 +13,7 @@
 -   搭配 express.static 的 maxAge 屬性加快商品圖片讀取速度
 -   使用 Docker 安裝 MySQL 和 Redis
 
-### 待使用技術
+### 待使用技術：
 
 -   WebSocket
 -   SQL isolation level 性能調教
