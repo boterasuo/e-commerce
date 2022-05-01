@@ -74,6 +74,25 @@ a {
 .svgShrimp:hover {
     animation: shake 0.3s 1 linear normal both;
 }
+// navbar
+.mynav-cart {
+    width: 28px;
+    height: 28px;
+    position: relative;
+}
+.product-added {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+    top: 2px;
+    left: -2px;
+    display: none;
+}
+.cart-active {
+    display: block;
+}
 // 商品列表頁
 .product-card {
     margin: 1rem 2rem;

@@ -45,8 +45,30 @@ const productController = {
         }
     },
     product: async (req, res, next) => {
-        let returnData = {
-            title: 'product'
+        let productId = req.params.productId;
+        productId = parseInt(productId, 10);
+        // 從 Redis 取出所有產品
+        let products = await client.get('products');
+        products = JSON.parse(products);
+        // 篩選出所選的產品
+        let product = products.find((value) => {
+            return value.id === productId;
+        });
+        console.log('product', product);
+        // 搭配 socket.io 做庫存顯示
+        let returnData = {};
+        if (product) {
+            returnData = {
+                title: product.name,
+                active: {shop: true},
+                info: product,
+            }
+        } else {
+            returnData = {
+                title: 'Product Not Found!',
+                active: {shop: true},
+                info: null,
+            }
         }
         res.render('product', returnData);
     },

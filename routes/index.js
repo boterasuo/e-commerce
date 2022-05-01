@@ -14,15 +14,14 @@ router.post('/signIn', userController.login);
 router.get('/logout', userController.logout);
 
 // products
-router.get('/products', 
-  productController.productsCache,
-  productController.products);
-router.get('/test', 
-productController.testCach,
-  productController.test
-);
-router.get('/product', productController.product);
+router.get('/products', productController.productsCache, productController.products);
+router.get('/products/:productId', productController.product);
+router.get('/test', productController.testCach, productController.test);
 
+// socket test
+router.get('/socket', (req, res) => {
+  res.render('socketTest');
+})
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

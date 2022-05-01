@@ -4,9 +4,7 @@ const path = require('path');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-
 const sassMiddleware = require('node-sass-middleware');
-
 const hbs = require('hbs');
 
 const app = express();
@@ -14,6 +12,15 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+// io.on('connection', (socket) => {
+//   setInterval(() => {
+//     socket.emit('second', {'second': new Date().getSeconds()})
+//   }, 1000);
+// });
 
 const expressSession = require('express-session');
 let fileStore = require('session-file-store')(expressSession);
@@ -33,7 +40,6 @@ hbs.registerPartials(__dirname + '/views/partials');
 // section helper for jQuery
 hbs.registerHelper('section', function(name, options) {
   if(!this._sections) this._sections = {};
-  // console.log('this', this);
   this._sections[name] = options.fn(this);
   return null;
 });
@@ -51,6 +57,11 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: 3600000
 }));
+
+app.use((req, res, next) => {
+  res.io = io;
+  next();
+});
 
 app.use((req, res, next) => {
   res.locals.auth = req.session.member;
@@ -76,4 +87,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app: app, server: server};

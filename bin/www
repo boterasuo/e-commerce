@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app').app;
 var debug = require('debug')('ecommerce:server');
-var http = require('http');
+// var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -18,8 +18,16 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
+const server = require('../app').server;
+// var server = http.createServer(app);
+// const { Server } = require('socket.io');
+// const io = new Server(server);
 
-var server = http.createServer(app);
+// io.on('connection', (socket) => {
+//   setInterval(() => {
+//     socket.emit('second', {'second': new Date().getSeconds()})
+//   }, 1000);
+// });
 
 /**
  * Listen on provided port, on all network interfaces.

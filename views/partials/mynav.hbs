@@ -12,7 +12,11 @@
         <li class="nav-item">
           <a class="nav-link {{#if active.shop}}active{{/if}}" href="/products">購物</a>
         </li>
-        <div class="ms-auto d-flex">
+        <div class="ms-auto d-flex align-items-center">
+          <div class="ratio ratio-1x1 me-2 mynav-cart">
+            <img src="/images/cart.png" alt="cart" class="cover-fit">
+            <div class="product-added"></div>
+          </div>
           {{#unless auth}}
           <li class="nav-item">
             <a class="nav-link {{#if active.signUp}}active{{/if}}" href="/signUp">註冊</a>
