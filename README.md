@@ -9,6 +9,7 @@
 
 -   使用 Express.js 搭配 hbs 作為 view engine
 -   使用 node-sass-middleware 撰寫 scss
+-   使用 nodemailer 進行註冊帳號驗證程序
 -   使用 express-session 儲存登入資料
 -   使用 node-redis 將商品列表暫存在 redis 資料庫中
 -   搭配 express.static 的 maxAge 屬性加快商品圖片讀取速度
