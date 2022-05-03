@@ -1,0 +1,21 @@
+{{#if confirm}}
+<h2>註冊帳號驗證成功!</h2>
+<p>頁面將自動跳轉...<span id="count"></span></p>
+{{/if}}
+{{#unless confirm}}
+<h2>帳號驗證失敗</h2>
+<p>查無此用戶</p>
+{{/unless}}
+
+{{#section 'script'}}
+<script>
+    for (let i=0; i<3; i++) {
+        setTimeout(() => {
+            $('#count').text(`${3 - i}`)
+        }, 1000 * i);
+    }
+    setTimeout(() => {
+       window.location.replace('/signIn')
+    }, 3000);
+</script>
+{{/section}}

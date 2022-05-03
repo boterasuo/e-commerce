@@ -14,10 +14,8 @@ const productController = {
         let [products] = await connection.execute(
             'SELECT * FROM products'
         );
-        // await client.connect();
-        console.log('start to cache', products);
         let cacheProducts = JSON.stringify(products);
-        await client.setEx('products', 3600, cacheProducts);
+        await client.set('products', cacheProducts);
         // console.log('products', products);
         console.log('Redis cached');
         let returnData = {

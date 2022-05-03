@@ -9,6 +9,7 @@ const productController = require('../controllers/productController');
 router.post('/signUp/checkEmail', userController.emailCheck);
 router.get('/signUp', userController.registerPage);
 router.post('/signUp', userController.registerRules, userController.register);
+router.get('/confirm/:confirmationCode', userController.emailConfirm);
 router.get('/signIn', userController.loginPage);
 router.post('/signIn', userController.login);
 router.get('/logout', userController.logout);

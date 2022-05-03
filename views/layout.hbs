@@ -43,6 +43,11 @@
     // 關閉訊息提醒視窗
     $('#close-msgBOX').click(() => {
       $('.message-box').removeClass('show');
-    })
+    });
+    // navbar 的 cart 狀態
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length > 0) {
+      $('#added-inform').addClass('cart-active');
+    }
   </script>
 </html>

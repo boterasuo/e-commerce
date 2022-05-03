@@ -1,6 +1,6 @@
 // 回前一頁
 $('#backBtn').click(() => {
-    history.back();
+    window.location.href = '/products';
 });
 
 // 加入購物車
@@ -16,6 +16,7 @@ $('#addCart').click(function(e) {
     if (index > -1) {
         return;
     } else {
+        $('#added-inform').addClass('cart-active');
         currentCart.push(productObj);
     }
     localStorage.setItem('cart', JSON.stringify(currentCart));
