@@ -1,0 +1,42 @@
+<div class="cart-detail">
+    <h3>購物車明細</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 30%;">商品名</th>
+                <th>數量</th>
+                <th>小計</th>
+            </tr>
+        </thead>
+        <tbody id="products-row">
+            {{!-- <tr>
+                <td>好吃蛤蜊</td>
+                <td>
+                    <input type="button" value="-" id="minusBtn">
+                    <input type="number" min="0" value="1" id="">
+                    <input type="button" value="+" id="plusBtn">
+                </td>
+                <td>NT$ 500</td>
+            </tr>
+            <tr>
+                <td>好吃透抽</td>
+                <td>
+                    <input type="button" value="-">
+                    <input type="number" min="0" value="1">
+                    <input type="button" value="+">
+                </td>
+                <td>NT$ 600</td>
+            </tr> --}}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="text-end pe-5">總計</td>
+                <td id="totalAmount">NT$ 500</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+{{#section 'script'}}
+<script src="/javascripts/cart.js"></script>
+{{/section}}

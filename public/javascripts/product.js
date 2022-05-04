@@ -10,6 +10,7 @@ $('#addCart').click(function(e) {
         id: product[0],
         name: product[1],
         price: product[2],
+        count: 1
     };
     let currentCart = JSON.parse(localStorage.getItem('cart')) || [];
     let index = currentCart.findIndex((v) => v.id === productObj.id);

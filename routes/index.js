@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const productController = require('../controllers/productController');
+const orderController = require('../controllers/orderController');
 
 // signUp & signIn
 router.post('/signUp/checkEmail', userController.emailCheck);
@@ -18,6 +19,9 @@ router.get('/logout', userController.logout);
 router.get('/products', productController.productsCache, productController.products);
 router.get('/products/:productId', productController.product);
 router.get('/test', productController.testCach, productController.test);
+
+// cart & order
+router.get('/cart', orderController.getCart);
 
 // socket test
 router.get('/socket', (req, res) => {

@@ -4,29 +4,6 @@ const { nanoid } = require('nanoid');
 const { body, validationResult } = require('express-validator');
 const transporter = require('../service/email');
 
-// input 後端驗證 (express-validator)
-// const inputValid = function(req, res, email, password, confirmPw) {
-//     const validateResult = validationResult(req);
-//         if (!validateResult.isEmpty()) {
-//             let error = validateResult.mapped();
-//             // console.log('error', error);
-//             let errorDIV = {};
-//             let errorKeys = Object.keys(error);
-//             errorKeys.forEach((key) => (errorDIV[key] = error[key].msg));
-//             console.log('errorDIV', errorDIV);
-//             return res.render('register', { 
-//                 title: 'sign up',
-//                 active: {signUp: true},
-//                 errorDIV,
-//                 email,
-//                 password,
-//                 confirmPw
-//             });
-//             // 這個寫法也可以
-//             // res.locals.errorDIV = errorDIV;
-//             // res.render('register');
-// }};
-
 const userController = {   
     // 註冊頁 get
     registerPage: (req, res) => {
