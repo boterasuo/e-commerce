@@ -4,7 +4,7 @@ let productsRow = '';
 let totalAmount = 0;
 currentCart.forEach(product => {
     // 總價
-    totalAmount += parseInt(product.price, 10);
+    totalAmount += parseInt(product.price, 10) * product.count;
     // 明細
     productsRow += `
         <tr>
@@ -14,7 +14,7 @@ currentCart.forEach(product => {
                 <input type="number" min="0" value="${product.count}">
                 <input type="button" value="+" id="plusBtn">
             </td>
-            <td id="subTotal" data-price="${product.price}">NT$ ${product.price}</td>
+            <td id="subTotal" data-price="${product.price}">NT$ ${product.price * product.count}</td>
         </tr>
     `
 });
